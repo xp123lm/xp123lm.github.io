@@ -6,13 +6,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vue全局事件总线 - xphome</title>
+  <title>三支一扶 - xphome</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
   
-  <meta name="description" content="实现任意组件之间的通信
-全局事件总线image-202...">
+  
   <meta name="author" content="lxp">
   <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
   <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
@@ -153,7 +152,7 @@
       
       
     </div>
-    <div class="center">Vue全局事件总线</div>
+    <div class="center">标签</div>
     <div class="right">
       <i class="iconfont iconmenu j-navbar-menu"></i>
     </div>
@@ -189,96 +188,23 @@
   </div>
 </nav>
   <main id="main">
-  <div class="article-wrap">
-    <div class="row container">
-      <div class="col-xl-3"></div>
-      <div class="col-xl-6"><article class="article">
-  <div class="wrap">
-    <section class="head">
-  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
-  <div class="head-mask">
-    <h1 class="head-title">Vue全局事件总线</h1>
-    <div class="head-info">
-      <span class="post-info-item"><i class="iconfont iconcalendar"></i>April 06, 2023</span>
-      
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>559</span>
-    </div>
-  </div>
-</section>
-    <section class="main">
-      <section class="content">
+  <section class="archive">
+    <div class="archive-container">
+      <div class="archive-post">
+        <h2 class="archive-total"># 三支一扶</h2>
         
-        <p>实现任意组件之间的通信</p>
-<h2 id="全局事件总线"><a href="#全局事件总线" class="headerlink" title="全局事件总线"></a>全局事件总线</h2><p><img    class="lazyload" data-original="C:\Users\86188\AppData\Roaming\Typora\typora-user-images\image-20230406191115634.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20230406191115634</span></p>
-<p>&#x3D;&#x3D;x具备的条件：&#x3D;&#x3D;</p>
-<pre><code> 1. 所有组件均可看到
- 2. 能够使用$on,$off,$emit
-</code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li><p>一种组件间通信的方式，适用于<span style="color:red">任意组件间通信</span>。</p>
-</li>
-<li><p>安装全局事件总线（main.js）：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;<br>	......<br>	<span class="hljs-title function_">beforeCreate</span>(<span class="hljs-params"></span>) &#123;<br>		<span class="hljs-title class_">Vue</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">$bus</span> = <span class="hljs-variable language_">this</span> <span class="hljs-comment">//安装全局事件总线，$bus就是当前应用的vm</span><br>	&#125;,<br>    ......<br>&#125;) <br></code></pre></td></tr></table></figure>
-</li>
-<li><p>使用事件总线：</p>
-<ol>
-<li><p>接收数据：A组件想接收数据，则在A组件中给$bus绑定自定义事件，事件的<span style="color:red">回调留在A组件自身。</span></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">methods</span>(<span class="hljs-params"></span>)&#123;<br>  <span class="hljs-title function_">demo</span>(<span class="hljs-params">data</span>)&#123;......&#125;<br>&#125;<br>......<br><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$bus</span>.$on(<span class="hljs-string">&#x27;xxxx&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">demo</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>提供数据：<code>this.$bus.$emit(&#39;xxxx&#39;,数据)</code></p>
-</li>
-</ol>
-</li>
-<li><p>最好在beforeDestroy钩子中，用$off去解绑<span style="color:red">当前组件所用到的</span>事件。</p>
-</li>
-</ol>
-
-      </section>
-      <section class="extra">
-        
-          <ul class="copyright">
-  
-    <li><strong>本文作者：</strong>lxp</li>
-    <li><strong>本文链接：</strong><a href="http://example.com/2023/04/06/Vue%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2023&#x2F;04&#x2F;06&#x2F;Vue%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2023&#x2F;04&#x2F;06&#x2F;Vue%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF&#x2F;index.html</a></li>
-    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
-  
-</ul>
-        
-        
-          <section class="donate">
-  <div id="qrcode-donate">
-    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
-  </div>
-  <div class="icon">
-    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
-    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
-  </div>
-</section>
-        
-        
-        
-  <nav class="nav">
-    <a href="/2023/04/09/%E5%B1%B1%E8%A5%BF%E4%B8%89%E6%94%AF%E4%B8%80%E6%89%B6-%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80-%E5%93%B2%E5%AD%A61/"><i class="iconfont iconleft"></i>山西三支一扶-理论基础-哲学1</a>
-    <a href="/2023/04/06/Vue%E7%BB%84%E4%BB%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/">Vue全局事件总线<i class="iconfont iconright"></i></a>
-  </nav>
-
-      </section>
-      
-    </section>
-  </div>
-</article></div>
-      <div class="col-xl-3">
         
           
-  <aside class="toc-wrap">
-    <h3 class="toc-title">文章目录：</h3>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF"><span class="toc-text">全局事件总线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
-  </aside>
-
+            <h3 class="archive-year">2023 年</h3>
+          
+          <div class="archive-item">
+            <a class="archive-date" href="/2023/04/09/%E5%B1%B1%E8%A5%BF%E4%B8%89%E6%94%AF%E4%B8%80%E6%89%B6-%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80-%E5%93%B2%E5%AD%A61/">04/09</a>
+            <a class="archive-title" href="/2023/04/09/%E5%B1%B1%E8%A5%BF%E4%B8%89%E6%94%AF%E4%B8%80%E6%89%B6-%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80-%E5%93%B2%E5%AD%A61/">山西三支一扶-理论基础-哲学1</a>
+          </div>
         
       </div>
     </div>
-  </div>
+  </section>
 </main>
   
 
